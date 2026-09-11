@@ -105,18 +105,28 @@ fi
 # --- Install / update the Valheim server (Steam app 896660) ---
 echo ">>> Downloading Valheim server (this can take a while)..."
 mkdir -p "$VALHEIM_DIR"
-sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" \
+
+if sudo -u "$STEAM_USER" bash <<EOF
+"$STEAMCMD_DIR/steamcmd.sh" \
     +login anonymous \
     +force_install_dir "$VALHEIM_DIR" \
     +app_update 896660 validate \
-    +quit || {
-        echo ">>> Retrying SteamCMD installation..."
-        sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" \
-            +login anonymous \
-            +force_install_dir "$VALHEIM_DIR" \
-            +app_update 896660 validate \
-            +quit
-    }
+    +quit
+EOF
+then
+    echo ""
+    echo "================================================="
+    echo " [SUCCESS] Valheim server installed successfully!"
+    echo "================================================="
+    echo ""
+else
+    echo ""
+    echo "================================================="
+    echo " [ERROR] SteamCMD failed to install Valheim."
+    echo "================================================="
+    echo ""
+    exit 1
+fi
 
 # ------------------------------------------------------------------
 # Deploy scripts, config and systemd unit
