@@ -13,8 +13,8 @@ Debian 13 install, using SteamCMD and a systemd service.
 ## Install
 
 ```bash
-git clone https://github.com/TON-PSEUDO/valheim-server-setup.git
-cd valheim-server-setup
+git clone https://github.com/stealthyjs/valheim-server.git
+cd valheim-server
 chmod +x install.sh
 sudo ./install.sh
 ```
