@@ -102,15 +102,21 @@ else
     echo ">>> SteamCMD already installed, skipping."
 fi
 
-# ------------------------------------------------------------------
-# Install / update the Valheim server (Steam app 896660)
-# ------------------------------------------------------------------
+# --- Install / update the Valheim server (Steam app 896660) ---
 echo ">>> Downloading Valheim server (this can take a while)..."
+mkdir -p "$VALHEIM_DIR"
 sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" \
-    +force_install_dir "$VALHEIM_DIR" \
     +login anonymous \
+    +force_install_dir "$VALHEIM_DIR" \
     +app_update 896660 validate \
-    +quit
+    +quit || {
+        echo ">>> Retrying SteamCMD installation..."
+        sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" \
+            +login anonymous \
+            +force_install_dir "$VALHEIM_DIR" \
+            +app_update 896660 validate \
+            +quit
+    }
 
 # ------------------------------------------------------------------
 # Deploy scripts, config and systemd unit
