@@ -110,10 +110,10 @@ STEAM_SCRIPT="/tmp/valheim_update.txt"
 cat > "$STEAM_SCRIPT" <<EOF
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
-+force_install_dir "$VALHEIM_DIR"
-+login anonymous
-+app_update 896660 validate
-+quit
+force_install_dir "$VALHEIM_DIR"
+login anonymous
+app_update 896660 validate
+quit
 EOF
 
 chown "$STEAM_USER":"$STEAM_USER" "$STEAM_SCRIPT"
