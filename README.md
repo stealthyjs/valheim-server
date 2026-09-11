@@ -13,8 +13,8 @@ Debian 13 install, using SteamCMD and a systemd service.
 ## Install
 
 ```bash
-git clone https://github.com/TON-PSEUDO/valheim-server-setup.git
-cd valheim-server-setup
+git clone https://github.com/stealthyjs/valheim-server.git
+cd valheim-server
 chmod +x install.sh
 sudo ./install.sh
 ```
@@ -31,6 +31,18 @@ public listing and backup retention, then install everything.
 | Status | `systemctl status valheim` |
 | Logs | `journalctl -u valheim -f` |
 | Update | `sudo /opt/valheim/update.sh` |
+
+## Updates
+
+Valheim frequently releases patches that require updating the dedicated 
+server (otherwise players with updated clients won't be able to connect).
+
+To update the server to the latest version via SteamCMD:
+
+```bash
+sudo /opt/valheim/update.sh
+```
+(This script will fetch the latest update and automatically restart the systemd service).
 
 ## Backups
 
