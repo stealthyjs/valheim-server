@@ -105,11 +105,13 @@ fi
 # --- Install / update the Valheim server (Steam app 896660) ---
 echo ">>> Downloading Valheim server (this can take a while)..."
 mkdir -p "$VALHEIM_DIR"
-
+sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" +quit || true
 if sudo -u "$STEAM_USER" bash <<EOF
 "$STEAMCMD_DIR/steamcmd.sh" \
-    +login anonymous \
+    @ShutdownOnFailedCommand 1 \
+    @NoPromptForPassword 1 \
     +force_install_dir "$VALHEIM_DIR" \
+    +login anonymous \
     +app_update 896660 validate \
     +quit
 EOF
