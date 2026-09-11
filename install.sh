@@ -128,6 +128,14 @@ if sudo -u "$STEAM_USER" "$STEAMCMD_DIR/steamcmd.sh" +runscript "$STEAM_SCRIPT";
     echo " [SUCCESS] Valheim server installed successfully!"
     echo "================================================="
     echo ""
+    mkdir -p "/home/${STEAM_USER}/.steam/sdk64"
+    ln -sf "${VALHEIM_DIR}/linux64/steamclient.so" "/home/${STEAM_USER}/.steam/sdk64/steamclient.so"
+    chown -h "$STEAM_USER":"$STEAM_USER" "/home/${STEAM_USER}/.steam/sdk64/steamclient.so"
+
+    if [ ! -f "${VALHEIM_DIR}/valheim_server.x86_64" ]; then
+        echo "[ERROR] Le binaire valheim_server.x86_64 est absent malgré un exit code 0 de SteamCMD."
+        exit 1
+    fi
 else
     rm -f "$STEAM_SCRIPT"
     echo ""
