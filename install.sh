@@ -107,6 +107,7 @@ fi
 # ------------------------------------------------------------------
 echo ">>> Downloading Valheim server (this can take a while)..."
 mkdir -p "$VALHEIM_DIR"
+chown -R "$STEAM_USER":"$STEAM_USER" "$VALHEIM_DIR"
 
 STEAM_SCRIPT="/tmp/valheim_update.txt"
 cat > "$STEAM_SCRIPT" <<EOF
