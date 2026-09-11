@@ -32,6 +32,18 @@ public listing and backup retention, then install everything.
 | Logs | `journalctl -u valheim -f` |
 | Update | `sudo /opt/valheim/update.sh` |
 
+## Updates
+
+Valheim frequently releases patches that require updating the dedicated 
+server (otherwise players with updated clients won't be able to connect).
+
+To update the server to the latest version via SteamCMD:
+
+```bash
+sudo /opt/valheim/update.sh
+```
+(This script will fetch the latest update and automatically restart the systemd service).
+
 ## Backups
 
 A nightly cron job (4 AM) backs up worlds to `/opt/valheim/backups`.
